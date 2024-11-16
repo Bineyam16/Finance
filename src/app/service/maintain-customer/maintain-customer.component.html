@@ -1,0 +1,544 @@
+<div class="m-3">
+  <div class="row">
+    <div class="col-md-8">
+      <form>
+        <div class="col-md-12 row form-group">
+          <label
+            for="Customer"
+            class="font-weight-bold font-weight-bold col-sm-3 col-form-label"
+            translate
+            >Customer</label
+          >
+          <div class="col-sm-9">
+            <p-autoComplete
+              *ngIf="!edit_form"
+              name="customer_ID"
+              filter="true"
+              [(ngModel)]="customer.customer_ID"
+              [suggestions]="customersSearchResult"
+              (completeMethod)="searchCustomers($event)"
+              (onSelect)="CheckPrimaryKey()"
+              field="customer_ID"
+            >
+              <ng-template let-item pTemplate="selectedItem">
+                <span style="vertical-align: middle; margin-left: 0.5em">{{
+                  item.customer_ID
+                }}</span>
+              </ng-template>
+              <ng-template let-item pTemplate="item">
+                <div
+                  class="ui-helper-clearfix"
+                  style="position: relative; height: 25px"
+                >
+                  <div style="font-size: 14px; margin-top: 4px">
+                    {{ item.customer_ID }}
+                  </div>
+                </div>
+              </ng-template>
+            </p-autoComplete>
+
+            <input
+              *ngIf="edit_form"
+              type="text"
+              class="form-control"
+              [(ngModel)]="customerusername"
+              #FullName="ngModel"
+              name="User Name"
+              disabled
+            />
+          </div>
+        </div>
+
+        <div class="col-md-12 row form-group">
+          <label
+            for="FullName"
+            class="font-weight-bold font-weight-bold col-sm-3 col-form-label"
+            translate
+            >Full Name</label
+          >
+
+          <div class="col-sm-9">
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="customer.name"
+              #FullName="ngModel"
+              name="FullName"
+              placeholder=" "
+              id="FullName"
+              [ngClass]="{ 'is-invalid': FullName.invalid }"
+              required
+              readonly
+            />
+          </div>
+        </div>
+
+        <div class="col-md-12 row form-group">
+          <label
+            for="FullName"
+            class="font-weight-bold font-weight-bold col-sm-3 col-form-label"
+            translate
+            >Full Name EN</label
+          >
+
+          <div class="col-sm-9">
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="nameEn"
+              #FullName="ngModel"
+              name="FullName"
+              placeholder=" "
+              id="FullName"
+              [ngClass]="{ 'is-invalid': FullName.invalid }"
+              required
+              readonly
+            />
+          </div>
+        </div>
+
+        <div class="form-group row col-md-12">
+          <label
+            for="org_Code"
+            class="font-weight-bold font-weight-bold col-sm-3 col-form-label"
+            translate
+            >Organization code</label
+          >
+          <div class="col-sm-9">
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="orgName"
+              #org_Code="ngModel"
+              name="org_Code"
+              id="org_Code"
+              placeholder=" "
+
+              required
+              readonly
+            />
+          </div>
+        </div>
+
+        <div class="form-group row col-md-12">
+          <label
+            for="address"
+            class="font-weight-bold font-weight-bold col-sm-3 col-form-label"
+            translate
+            >Address</label
+          >
+          <div class="col-sm-9">
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="customer.address"
+              #address="ngModel"
+              name="address"
+              id="address"
+              placeholder=" "
+              [ngClass]="{ 'is-invalid': address.invalid }"
+            />
+          </div>
+        </div>
+
+        <div class="form-group row col-md-12">
+          <label
+            for="website"
+            class="font-weight-bold font-weight-bold col-sm-3 col-form-label"
+            translate
+            >Website</label
+          >
+          <div class="col-sm-9">
+            <input
+              type="website"
+              class="form-control"
+              [(ngModel)]="customer.website"
+              #website="ngModel"
+              name="website"
+              id="website"
+              placeholder=" "
+              [ngClass]="{ 'is-invalid': website.invalid }"
+            />
+          </div>
+        </div>
+
+        <div class="form-group row col-md-12">
+          <label
+            for="sales_Tax_Type"
+            class="font-weight-bold font-weight-bold col-sm-3 col-form-label"
+            translate
+          >
+            Tax Type</label
+          >
+          <div class="col-sm-9">
+            <select
+              class="form-control col-md-12"
+              [(ngModel)]="customer.sales_Tax_Type"
+              #sales_Tax_Type="ngModel"
+              name="sales_Tax_Type"
+              id="sales_Tax_Type"
+              #sales_Tax_Type="ngModel"
+              [ngClass]="{ 'is-invalid': sales_Tax_Type.invalid }"
+              required
+            >
+              <option disabled>select</option>
+              <option *ngFor="let tax_type of TaxTypes" [value]="tax_type.code">
+                {{ tax_type.description }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group row col-md-12">
+          <label
+            for="customer_Posting_Group"
+            class="font-weight-bold font-weight-bold col-sm-3 col-form-label"
+            translate
+          >
+            Customer posting group</label
+          >
+          <div class="col-sm-9">
+            <select
+              class="form-control col-md-12"
+              [(ngModel)]="customer.customer_Posting_Group"
+              #customer_Posting_Group="ngModel"
+              name="customer_Posting_Group"
+              id="customer_Posting_Group"
+              #customer_Posting_Group="ngModel"
+              [ngClass]="{ 'is-invalid': customer_Posting_Group.invalid }"
+              required
+            >
+              <option disabled>select</option>
+              <option
+                *ngFor="let customer_group of CustomerPostingGroups"
+                [value]="customer_group.code"
+              >
+                {{ customer_group.code }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group row col-md-12">
+          <label
+            for="gen_Bus_Posting_Group"
+            class="font-weight-bold font-weight-bold col-sm-3 col-form-label"
+            translate
+          >
+            Bus posting group</label
+          >
+          <div class="col-sm-9">
+            <select
+              class="form-control col-md-12"
+              [(ngModel)]="customer.gen_Bus_Posting_Group"
+              #gen_Bus_Posting_Group="ngModel"
+              name="gen_Bus_Posting_Group"
+              id="gen_Bus_Posting_Group"
+              #gen_Bus_Posting_Group="ngModel"
+              [ngClass]="{ 'is-invalid': gen_Bus_Posting_Group.invalid }"
+              required
+            >
+              <option disabled>select</option>
+              <option
+                *ngFor="let posting_group of BusPostingGroups"
+                [value]="posting_group.code"
+              >
+                {{ posting_group.description }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row col-md-12">
+          <label
+            for="country"
+            class="font-weight-bold font-weight-bold col-sm-3 col-form-label"
+            translate
+          >
+           Country</label
+          >
+          <div class="col-sm-9">
+            <select
+              class="form-control col-md-12"
+              [(ngModel)]="customer.country"
+              #country="ngModel"
+              name="Country"
+              id="Country"
+              #country="ngModel"
+              [ngClass]="{ 'is-invalid': country.invalid }"
+              required
+            >
+              <option disabled>select</option>
+              <option *ngFor="let contry of countrys" [value]="contry.lkdetail_code">
+                {{ contry.english_description }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row col-md-12">
+          <label
+            for="tin"
+            class="font-weight-bold font-weight-bold col-sm-3 col-form-label"
+            translate
+            >Tin</label
+          >
+          <div class="col-sm-9">
+            <input
+              type="tin"
+              class="form-control"
+              [(ngModel)]="customer.tin"
+              #tin="ngModel"
+              name="tin"
+              id="tin"
+              placeholder=" "
+              [ngClass]="{ 'is-invalid': tin.invalid }"
+
+            />
+          </div>
+        </div>
+
+        <div class="form-group row col-md-12">
+          <label
+            for="telephone_Office"
+            class="font-weight-bold font-weight-bold col-sm-3 col-form-label"
+            translate
+            >Telephone office</label
+          >
+          <div class="col-sm-9">
+            <input
+              type="telephone_Office"
+              class="form-control"
+              [(ngModel)]="customer.telephone_Office"
+              #telephone_Office="ngModel"
+              name="telephone_Office"
+              id="telephone_Office"
+              placeholder=" "
+              [ngClass]="{ 'is-invalid': telephone_Office.invalid }"
+            />
+          </div>
+        </div>
+
+        <div class="form-group row col-md-12">
+          <label
+            for="mobile"
+            class="font-weight-bold font-weight-bold col-sm-3 col-form-label"
+            translate
+            >Mobile</label
+          >
+          <div class="col-sm-9">
+            <input
+              type="mobile"
+              class="form-control"
+              [(ngModel)]="customer.mobile"
+              #mobile="ngModel"
+              name="mobile"
+              id="mobile"
+              placeholder=" "
+              [ngClass]="{ 'is-invalid': mobile.invalid }"
+              (ngModelChange)="onMobileChange($event)"
+            />
+          </div>
+        </div>
+
+
+        <div class="form-group row col-md-12">
+          <label
+            for="email"
+            class="font-weight-bold font-weight-bold col-sm-3 col-form-label"
+            translate
+            >Email</label
+          >
+          <div class="col-sm-9">
+            <input
+              type="email"
+              class="form-control"
+              [(ngModel)]="customer.email"
+              #email="ngModel"
+              name="email"
+              id="email"
+              placeholder=" "
+              [ngClass]="{ 'is-invalid': email.invalid }"
+            />
+          </div>
+        </div>
+        <div class="form-group row col-md-12">
+          <label
+            class="font-weight-bold font-weight-bold col-sm-3 col-form-label"
+            translate
+          >
+            Property Type
+          </label>
+          <div class="col-sm-9">
+            <select
+              class="form-control col-md-12"
+              name="property_Type"
+              id="property_Type"
+              required
+              (change)="onPropertyTypeChange($event.target.value)"
+            >
+              <option disabled selected>select</option>
+              <option
+                *ngFor="let propertytype of propertytype"
+                [value]="propertytype.property_Type_ID"
+              >
+                {{ propertytype.property_Type }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row col-md-6" *ngIf=" selectedpropertytype">
+          <label for="PropertyStatus" class="col-sm-3 col-form-label" translate>Half VAT</label>
+          <div class="col-sm-9">
+            <p-checkbox
+              name="terminate"
+              [(ngModel)]="halfVAT"
+              (ngModelChange)="onHalfVATChange($event)"
+              [binary]="true"
+            ></p-checkbox>
+          </div>
+        </div>
+
+        <div class="form-group row col-md-6"*ngIf="selectedpropertytype">
+          <label for="PropertyStatus" class="col-sm-3 col-form-label" translate>Have No WTH</label>
+          <div class="col-sm-9">
+            <p-checkbox
+              name="active"
+              [(ngModel)]="haveNoWTH"
+              (ngModelChange)="onHaveNoWTHChange($event)"
+              [binary]="true"
+            ></p-checkbox>
+          </div>
+        </div>
+
+
+
+        <div class="text-center">
+          <button
+            type="button"
+            *ngIf="!edit_form"
+            (click)="addCustomer()"
+            value="Save customer"
+            class="btn btn-primary"
+          >
+            Save customer
+          </button>
+
+          <button
+            type="button"
+            *ngIf="edit_form"
+            (click)="updateCustomer()"
+            value="Save customer"
+            class="btn btn-primary"
+          >
+            Update customer
+          </button>
+
+          <button
+            type="button"
+            *ngIf="edit_form"
+            (click)="deleteCustomer()"
+            value="Save customer"
+            class="btn btn-danger mx-3"
+          >
+            Delete
+          </button>
+        </div>
+        <button type="button" class="btn btn-primary button-space" (click)="openModal3()">Open Payment Table</button>
+<button type="button" class="btn btn-primary" (click)="openModal4()">Post</button>
+      </form>
+    </div>
+
+    <div class="col-md-4">
+      Details
+      <a href="/#/" class="row">Customer History</a>
+      <a href="/#/" class="row">Customer Beginning Balance</a>
+      <a href="#/" class="row">Sales Info</a>
+    </div>
+  </div>
+</div>
+<ngx-smart-modal #date identifier="date">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Select Posting Date</h5>
+      <button type="button" class="close" (click)="closeModal4()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group row col-md-12" *ngIf="posting_date && posting_date.length > 0">
+        <label for="posting_date" class="col-sm-4 col-form-label">Posting Date</label>
+        <div class="col-sm-8">
+          <select class="form-control"
+                  name="posting_date"
+                  id="posting_date"
+                  (change)="onPostingDateChange($event)"
+                  [ngClass]="{ 'is-invalid': posting_date.invalid }"
+                  required>
+            <option disabled value="">Select</option>
+            <option *ngFor="let date of posting_date" [value]="date">
+              {{ date }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+  <div class="form-group row col-md-6">
+    <label for="PropertyStatus" class="col-sm-3 col-form-label" translate>Penality</label>
+    <div class="col-sm-9">
+      <p-checkbox name="active"   binary="true"(onChange)="onpenalityChange($event)"></p-checkbox>
+    </div>
+  </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary" (click)="Manage_Rent_Collection_Transactionspost()">Post</button>
+      <button type="button" class="btn btn-secondary" (click)="closeModal4()">Close</button>
+    </div>
+  </div>
+</ngx-smart-modal>
+<ngx-smart-modal #pay identifier="pay" class="wide-modal">
+  <div class="modal-content">
+    <h2>Terminate Property Payment</h2>
+
+    <!-- PrimeNG Table -->
+    <p-table [value]="payment">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Amount</th>
+
+          <th>Document No</th>
+          <th>End Date</th>
+          <th>posting Date</th>
+
+          <th>Mobile</th>
+          <th>Name</th>
+          <th>Property ID</th>
+          <th>Is collected</th>
+          <th>Start Date</th>
+          <th>Actions</th> <!-- Added Actions column -->
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-pay>
+        <tr>
+          <td>{{ pay.amount }}</td>
+
+          <td>{{ pay.document_No }}</td>
+          <td>{{ pay.end_date | date:'yyyy-MM-dd' }}</td>
+          <td>{{ pay.posting_Date }}</td>
+
+          <td>{{ pay.mobile }}</td>
+          <td>{{ pay.name }}</td>
+          <td>{{ pay.property_ID }}</td>
+          <td>{{ pay.collected }}</td>
+          <td>{{ pay.start_Date | date:'yyyy-MM-dd' }}</td>
+          <td>
+            <!-- Delete Button -->
+            <button type="button" class="btn btn-danger ml-3"  (click)="deletePayment(pay)">Delete</button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+
+
+    <!-- Button to close modal -->
+  </div><button type="button" class="btn btn-primary" (click)="closeModal3()">Close</button>
+
+</ngx-smart-modal>
