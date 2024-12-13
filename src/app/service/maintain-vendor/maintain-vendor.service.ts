@@ -9,7 +9,7 @@ export class MaintainVendorService {
   public rootApiPath = environment.rootApiPath;
 
   public lookupUrl = environment.rootLookupApiPath;
-  
+
   constructor(private http: HttpClient) {}
 
   getLookup(table) {
@@ -34,20 +34,20 @@ export class MaintainVendorService {
       this.rootApiPath + "finance/VendorPostingGroup"
     );
   }
-  
+
   getBusinessPostingGroup() {
     return this.http.get(
       this.rootApiPath + "fixedAsset/procGenBusPostingGroups"
     );
   }
-  
+
   addVendor(vendor) {
     return this.http.post(
       this.rootApiPath + "finance/CVendor",
       vendor
     );
   }
-  
+
   updateVendor(vendor) {
     console.log(vendor);
     return this.http.put(
@@ -55,7 +55,7 @@ export class MaintainVendorService {
       vendor
     );
   }
-  
+
   deleteVendor(vendor) {
     return this.http.delete(
       this.rootApiPath + "finance/CVendor/" + vendor,

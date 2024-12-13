@@ -68,8 +68,9 @@
               required
             />
           </div>
+
         </div>
-        
+
         <div class="form-group row col-md-12">
           <label
             for="telephone_Office"
@@ -118,6 +119,31 @@
           </div>
         </div>
 
+
+
+
+        <div class="form-group row col-md-12">
+          <label
+            for="tin"
+            class="font-weight-bold font-weight-bold col-sm-3 col-form-label"
+            translate
+            >TIN</label
+          >
+          <div class="col-sm-9">
+            <input
+              type="tel"
+              class="form-control"
+              [(ngModel)]="vendor.tin"
+              #tin="ngModel"
+              name="tin"
+
+              id="tin"
+              required
+              placeholder="TIN"
+
+            />
+          </div>
+        </div>
         <div class="form-group row col-md-12">
           <label
             for="email"
@@ -165,6 +191,33 @@
             </select>
           </div>
         </div>
+
+
+        <div class="form-group row col-md-12">
+          <label
+            for="subCity"
+            class="font-weight-bold font-weight-bold col-sm-3 col-form-label"
+            translate
+          >
+           Subcity</label
+          >
+          <div class="col-sm-9">
+            <select
+              class="form-control col-md-12"
+              [(ngModel)]="vendor.subCity"
+              #subCity="ngModel"
+              name="subCity"
+              id="subCity"
+              #subCity="ngModel"
+              required
+            >
+              <option disabled>select</option>
+              <option *ngFor="let Subcitys of Subcity" [value]="Subcitys.id">
+                {{ Subcitys.name }}
+              </option>
+            </select>
+          </div>
+        </div>
         <div class="form-group row col-md-12">
           <label
             for="address"
@@ -186,7 +239,27 @@
             />
           </div>
         </div>
+        <div class="form-group row col-md-12">
+          <label
+            for="house_no"
+            class="font-weight-bold font-weight-bold col-sm-3 col-form-label"
+            translate
+          >
+          House No</label
+          >
+          <div class="col-sm-9">
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="vendor.house_no"
+              #house_no="ngModel"
+              name="house_no"
+              id="house_no"
+              placeholder="  "
 
+            />
+          </div>
+        </div>
         <div class="form-group row col-md-12">
           <label
             for="website"
@@ -320,7 +393,7 @@
             [disabled]="!VendorForm.valid"
             (click)="addVendor()"
             value="Save vendor"
-            
+
             class="btn btn-primary"
           >
             Save vendor

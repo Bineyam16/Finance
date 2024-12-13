@@ -9,6 +9,7 @@ import {
 import { TabsetComponent } from "ngx-bootstrap";
 import { MaintainVendorService } from "./maintain-vendor.service";
 import { NotificationsService } from "angular2-notifications";
+import { ServiceService } from "../service.service";
 
 @Component({
   selector: "app-maintain-vendor",
@@ -29,13 +30,15 @@ export class MaintainVendorComponent implements OnInit {
   @Input() edit_form;
   @Output() onclose = new EventEmitter();
   countrys: any;
+  Subcity: any;
 
   goto(id) {
     this.tabset.tabs[id].active = true;
   }
   constructor(
     private vendorService: MaintainVendorService,
-    private notificationsService: NotificationsService
+    private notificationsService: NotificationsService,
+    private ServiceService:ServiceService
   ) {
     this.vendor = new Vendor();
   }
@@ -46,6 +49,14 @@ export class MaintainVendorComponent implements OnInit {
     this.getBusPostingGroups();
     this.getVendorPostingGroup();
     this.getGetLookups()
+    this.getsubcity()
+  }
+  getsubcity(){
+    this.ServiceService.getsubcity().subscribe((response: any)=>{
+      console.log(response,'subbbbbcityyyy');
+      this.Subcity = response
+
+    })
   }
   getGetLookups() {
     this.vendorService.getLookup("Country").subscribe(

@@ -338,7 +338,7 @@ else {
 
   onPropertyTypeChange(selectedValue: any): void {
     console.log('Selected Property Type:', selectedValue);
-    if(selectedValue > 14){
+    if(selectedValue > 14 || selectedValue == 14){
 
     this.selectedpropertytype = true
     }

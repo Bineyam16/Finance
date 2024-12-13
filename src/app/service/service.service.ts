@@ -62,6 +62,7 @@ export class ServiceService {
       private Manage_Rent_Collection_Transactions = environment.rootPath2 + "proc_Manage_Rent_Collection_Transactions/manage"
 
      private updatemontlyunpaid = environment.rootPath2 + "RentContract/update-monthly-unpaid"
+     private subcity = environment.rootPath2 + "view/View_SubCityPropertyData"
   userid: string;
   AppNO;
   AppCode;
@@ -99,6 +100,7 @@ export class ServiceService {
     // Use the `delete` method with body (compatible with Angular 9+)
     return this.http.request('delete', this.deletepayment, { headers, body: data });
   }
+
   updateRentCollection(data: { propertyID: string, penality: boolean}): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json' // Ensure the content type is set to JSON
@@ -129,6 +131,9 @@ export class ServiceService {
       return this.http.get<any>(this.EthiopianToGregorian + "/" + year +"/"+month +"/"+ day)
 
     }
+  }
+  getsubcity(){
+    return this.http.get<any>(this.subcity)
   }
   getgregorianToEthiopianDate(date){
     if (date){
