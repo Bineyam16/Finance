@@ -55,11 +55,11 @@ export class ServiceService {
   private propertytype = environment.rootPath2 + 'ProprtyData/procProportyTypeLockup'
   private propertyforcust = environment.rootPath2 + 'view/View_for_customer_property_mentenace/'
   private RentContractUpdate = environment.rootPath2 + 'RentContractUpdate'
-      private custphone = environment.rootPath2 +"CustomerMobileUpdate"
-         private termntepaymentview = environment.rootPath2 +"view/View_for_terminate_property_payment/"
-             private deletepayment = environment.rootPath2 + "DeleteRentCollectionEach"
-             private gregorianToEthiopianDate = environment.rootPath2 + "gregorianToEthiopianDate";
-      private Manage_Rent_Collection_Transactions = environment.rootPath2 + "proc_Manage_Rent_Collection_Transactions/manage"
+  private custphone = environment.rootPath2 +"CustomerMobileUpdate"
+  private termntepaymentview = environment.rootPath2 +"view/View_for_terminate_property_payment/"
+  private deletepayment = environment.rootPath2 + "DeleteRentCollectionEach"
+  private gregorianToEthiopianDate = environment.rootPath2 + "gregorianToEthiopianDate";
+  private Manage_Rent_Collection_Transactions = environment.rootPath2 + "proc_Manage_Rent_Collection_Transactions/manage"
 
      private updatemontlyunpaid = environment.rootPath2 + "RentContract/update-monthly-unpaid"
      private subcity = environment.rootPath2 + "view/View_SubCityPropertyData"
